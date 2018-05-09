@@ -2,7 +2,7 @@ const express = require('express');
 const fileUpload = require('express-fileupload');
 const app = express();
 var path = require('path');
-
+//labelAnnotations
 // default options
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
