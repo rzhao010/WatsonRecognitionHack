@@ -78,7 +78,7 @@
                 $("#result").text("waiting for backend");
                 var form = new FormData($("#uploadForm")[0]);
                 $.ajax({
-                    url: "http://localhost:3000/upload",
+                    url: "/upload",
                     method: "POST",
                     dataType: 'json',
                     data: form,
