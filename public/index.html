@@ -5,15 +5,49 @@
     <meta charset="utf-8">
     <title>Image recognition</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <form ref='uploadForm' id='uploadForm' action='http://localhost:3000/upload' method='post' encType="multipart/form-data">
-        <input type="file" name="sampleFile" id="inputImage" />
-        <img id="previewImage" width="200" height="200" src="#" alt="your image" />
-        <input type='submit' value='Upload!' />
-    </form>
+
+    <div class="jumbotron text-center">
+        <h1>Image Recogintion</h1>
+        <p>upload any image of your choice and will find what is it</p>
+        <p>by bander</p>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <form id="uploadForm" enctype="multipart/form-data" name="uploadForm" novalidate>
+                    <input type="file" name="img" id="inputImage" />
+                    <input type="submit" value="Upload!" id="uploadImgButton" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <img id="previewImage" width="200" height="200" src="#" alt="your image" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <h3 id="result"></h3>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <footer class="page-footer font-small blue pt-4 mt-4">
+        <!--Copyright-->
+        <div class="footer-copyright py-3 text-center">
+            © 2018 Copyright:
+            <a> Bander Alshammari </a>
+        </div>
+        <!--/.Copyright-->
+    </footer>
+    <!--/.Footer-->
     <script>
         function readURL(input) {
             if (input.files && input.files[0]) {
@@ -26,11 +60,39 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        //hide image if no one chosen
         $("#previewImage").hide();
         $("#inputImage").change(function () {
             readURL(this);
             $("#previewImage").show();
+            $("#result").text("");
         });
+
+        ///submit image
+        $("#uploadImgButton").click(function (e) {
+            e.preventDefault();
+            if (document.getElementById("inputImage").files.length == 0) {
+                $("#result").text("no files selected");
+            }
+            else {
+                $("#result").text("waiting for backend");
+                var form = new FormData($("#uploadForm")[0]);
+                $.ajax({
+                    url: "http://localhost:3000/upload",
+                    method: "POST",
+                    dataType: 'json',
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $("#result").text(result.message);
+                        // console.log(result);
+                        // alert(result)
+                    },
+                    error: function (er) { }
+                });
+            }
+        })
     </script>
 </body>
 

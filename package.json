@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "startTest": "NODE_ENV=test node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -15,6 +17,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "express-fileupload": "^0.4.0"
+    "express-fileupload": "^0.4.0",
+    "node-env-file": "^0.1.8",
+    "watson-developer-cloud": "^3.4.1"
   }
 }
