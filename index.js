@@ -3,16 +3,12 @@ const fileUpload = require('express-fileupload');
 const app = express();
 var path = require('path');
 
-if (process.env.NODE_ENV == 'test') {
-    var env = require('node-env-file');
-    env('.env');
-}
 
 var VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3');
 var fs = require('fs');
 
 var visualRecognition = new VisualRecognitionV3({
-    api_key: process.env.api_key,
+    api_key: config.api_key,
     version: '2016-05-20'
 });
 
@@ -62,6 +58,6 @@ app.post('/upload', function (req, res) {
     });
 });
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(PORT || 3000, () => {
     console.log('listening on port 3000')
 })
