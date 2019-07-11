@@ -8,7 +8,7 @@ var VisualRecognitionV3 = require('watson-developer-cloud/visual-recognition/v3'
 var fs = require('fs');
 
 var visualRecognition = new VisualRecognitionV3({
-    api_key: config.api_key,
+    api_key: '<SF-SefxxSN8-o0ZOhWNbO4sreMs5-gAZwMmxS9JXqGWC>',
     version: '2016-05-20'
 });
 
